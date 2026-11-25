@@ -1,0 +1,18 @@
+package sakila.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/sakila")
+    public String home() {
+        return "/sakila/home.html";
+    }
+
+    @GetMapping("/")
+    public String root() {
+        return "/sakila/index.html";
+    }
+}
