@@ -11,6 +11,30 @@ This project is dependent on Spring Web, Lombok, Spring Data JPA, MySQL driver, 
 
 When you run the project locally on your computer, don't forget to update MySQL connection in application.properties file.
 
+## Supervision et alertes Discord
+
+Grafana utilise automatiquement Prometheus comme source de données. Prometheus collecte l'API sur `host.docker.internal:8080` : avec Docker Desktop, cette adresse vise le port 8080 de l'hôte. Il doit donc atteindre la bonne instance de l'API. Sur d'autres installations Docker, ce nom peut ne pas être disponible. Si une autre application écoute sur ce port, Prometheus peut collecter la mauvaise instance.
+
+Pour activer les notifications, créez un webhook dans un **salon de serveur Discord** via les paramètres du salon, Intégrations puis Webhooks. Le lien d'une conversation Discord n'est pas une URL de webhook. L'URL du webhook est un secret : ne la commitez pas et ne la partagez pas.
+
+1. Si le fichier local n'existe pas, créez-le à partir de l'exemple :
+
+   ```powershell
+   Copy-Item alertmanager\discord-webhook.example alertmanager\discord-webhook-url
+   ```
+
+2. Remplacez le contenu de `alertmanager/discord-webhook-url` par l'URL complète du webhook, sur une seule ligne. Ce fichier est ignoré par Git. L'URL d'exemple ne peut pas envoyer de notifications.
+3. Lancez la stack :
+
+   ```powershell
+   docker compose --profile observability up -d --build
+   ```
+
+   Après une modification de l'URL, redémarrez Alertmanager avec `docker compose --profile observability restart alertmanager`.
+4. Vérifiez la cible dans `http://localhost:9090/targets` et la source de données dans Grafana (`http://localhost:3000`, identifiants locaux `perf` / `perf`). L'alerte `SpringBootDown` se déclenche si la collecte échoue pendant une minute, puis Alertmanager envoie une notification Discord après le délai de regroupement ; il notifie aussi le retour à la normale. Pour la tester, arrêtez l'API, attendez au moins une minute et demie, puis redémarrez-la. Vérifiez au préalable qu'aucune autre API ne répond sur le port 8080 de l'hôte.
+
+Cette alerte détecte un échec de collecte de la cible configurée, pas la suppression de cette cible de la configuration Prometheus. Un tableau de bord Grafana reste à créer ou à importer.
+
 Home page
 
 ![image](https://github.com/wooly905/SakilaSpringBootMVC/assets/18693681/bd9fc8d4-5023-4023-8fb2-bf3d7ef9b94f)
