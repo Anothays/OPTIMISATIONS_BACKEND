@@ -1,0 +1,11 @@
+groups:
+  - name: api
+    rules:
+      - alert: ApiDown
+        expr: up{job="spring-boot"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "API injoignable"
+          description: "Prometheus ne peut plus scraper {{ $labels.instance }}."
