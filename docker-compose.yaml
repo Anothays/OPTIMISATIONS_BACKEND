@@ -66,7 +66,6 @@ services:
       - "9093:9093"
     volumes:
       - ./alertmanager/config.yml:/etc/alertmanager/alertmanager.yml:ro
-      - ./alertmanager/discord_webhook_url:/etc/alertmanager/discord_webhook_url:ro
 
 
 volumes:

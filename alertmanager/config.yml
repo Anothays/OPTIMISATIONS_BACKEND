@@ -8,5 +8,5 @@ route:
 receivers:
   - name: discord
     discord_configs:
-      - webhook_url_file: /etc/alertmanager/discord_webhook_url
+      - webhook_url: https://discord.com/api/webhooks/1575098275936346147/q-1HRkPTDFw6fPVW2hbLKHEyqj0OsSTeamj4UTTmaIIuD4G7gcxm6iL9MD7ZlvlwdDxA
         send_resolved: true
