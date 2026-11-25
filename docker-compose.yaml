@@ -41,6 +41,7 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus/config.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/rules.yml:/etc/prometheus/rules.yml:ro
 
   grafana:
     image: grafana/grafana:11.1.0
@@ -63,6 +64,9 @@ services:
     profiles: [ "observability" ]
     ports:
       - "9093:9093"
+    volumes:
+      - ./alertmanager/config.yml:/etc/alertmanager/alertmanager.yml:ro
+      - ./alertmanager/discord_webhook_url:/etc/alertmanager/discord_webhook_url:ro
 
 
 volumes:

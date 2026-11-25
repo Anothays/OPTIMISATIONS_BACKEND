@@ -29,3 +29,4 @@ replay_pid*
 #maven
 .mvn
 target/
+alertmanager/discord_webhook_url
