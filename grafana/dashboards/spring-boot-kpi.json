@@ -63,7 +63,7 @@
       },
       "targets": [
         {
-          "expr": "1000*sum(rate(http_server_requests_seconds_sum{application=\"$application\"}[$__rate_interval]))/sum(rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "1000*sum(rate(http_server_requests_seconds_sum{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))/sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -126,7 +126,7 @@
       },
       "targets": [
         {
-          "expr": "1000*histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[$__rate_interval])))",
+          "expr": "1000*histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval])))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -185,7 +185,7 @@
       },
       "targets": [
         {
-          "expr": "1000*histogram_quantile(0.99, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[$__rate_interval])))",
+          "expr": "1000*histogram_quantile(0.99, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval])))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -244,7 +244,7 @@
       },
       "targets": [
         {
-          "expr": "sum(rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -299,7 +299,7 @@
       },
       "targets": [
         {
-          "expr": "100*sum(rate(http_server_requests_seconds_count{application=\"$application\",status=~\"5..\"}[$__rate_interval]))/sum(rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "100*(sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\",status=~\"5..\"}[$__rate_interval])) or vector(0))/sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -358,7 +358,7 @@
       },
       "targets": [
         {
-          "expr": "100*sum(rate(http_server_requests_seconds_count{application=\"$application\",status=~\"[45]..\"}[$__rate_interval]))/sum(rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "100*(sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\",status=~\"[45]..\"}[$__rate_interval])) or vector(0))/sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -417,7 +417,7 @@
       },
       "targets": [
         {
-          "expr": "1000*histogram_quantile(0.5, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[$__rate_interval])))",
+          "expr": "1000*histogram_quantile(0.5, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval])))",
           "legendFormat": "P50",
           "refId": "A",
           "datasource": {
@@ -426,7 +426,7 @@
           }
         },
         {
-          "expr": "1000*histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[$__rate_interval])))",
+          "expr": "1000*histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval])))",
           "legendFormat": "P95",
           "refId": "B",
           "datasource": {
@@ -435,7 +435,7 @@
           }
         },
         {
-          "expr": "1000*histogram_quantile(0.99, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[$__rate_interval])))",
+          "expr": "1000*histogram_quantile(0.99, sum by (le) (rate(http_server_requests_seconds_bucket{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval])))",
           "legendFormat": "P99",
           "refId": "C",
           "datasource": {
@@ -444,7 +444,7 @@
           }
         },
         {
-          "expr": "1000*sum(rate(http_server_requests_seconds_sum{application=\"$application\"}[$__rate_interval]))/sum(rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "1000*sum(rate(http_server_requests_seconds_sum{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))/sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "legendFormat": "moyenne",
           "refId": "D",
           "datasource": {
@@ -507,7 +507,7 @@
       },
       "targets": [
         {
-          "expr": "sum(rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "legendFormat": "RPS",
           "refId": "A",
           "datasource": {
@@ -516,7 +516,7 @@
           }
         },
         {
-          "expr": "sum(rate(http_server_requests_seconds_count{application=\"$application\",status=~\"5..\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\",status=~\"5..\"}[$__rate_interval])) or vector(0)",
           "legendFormat": "5xx/s",
           "refId": "B",
           "datasource": {
@@ -563,7 +563,7 @@
       },
       "targets": [
         {
-          "expr": "1000*histogram_quantile(0.95, sum by (le, uri) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[$__rate_interval])))",
+          "expr": "1000*histogram_quantile(0.95, sum by (le, uri) (rate(http_server_requests_seconds_bucket{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval])))",
           "legendFormat": "{{uri}}",
           "refId": "A",
           "datasource": {
@@ -610,7 +610,7 @@
       },
       "targets": [
         {
-          "expr": "sum by (uri) (rate(http_server_requests_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "sum by (uri) (rate(http_server_requests_seconds_count{application=\"$application\",uri!~\"/actuator.*\"}[$__rate_interval]))",
           "legendFormat": "{{uri}}",
           "refId": "A",
           "datasource": {
@@ -1907,7 +1907,7 @@
       },
       "targets": [
         {
-          "expr": "100*sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\",state=\"ERROR\"}[$__rate_interval]))/sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "100*(sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\",state=\"ERROR\"}[$__rate_interval])) or vector(0))/sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\"}[$__rate_interval]))",
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -2077,7 +2077,7 @@
           }
         },
         {
-          "expr": "100*sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\",state=\"ERROR\"}[$__rate_interval]))/sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\"}[$__rate_interval]))",
+          "expr": "100*(sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\",state=\"ERROR\"}[$__rate_interval])) or vector(0))/sum(rate(spring_data_repository_invocations_seconds_count{application=\"$application\"}[$__rate_interval]))",
           "legendFormat": "échecs (%)",
           "refId": "B",
           "datasource": {
