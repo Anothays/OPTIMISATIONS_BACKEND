@@ -30,7 +30,7 @@ public class ActorController {
     public String getActors(Model model) {
         List<Actor> actors = actorRepository.findAll();
         model.addAttribute("actors", actors);
-        return "/sakila/actor-list.html";
+        return "sakila/actor-list";
     }
 
     // http://localhost:8080/actor-pagination
@@ -54,6 +54,6 @@ public class ActorController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        return "/sakila/actor-pagination.html";
+        return "sakila/actor-pagination";
     }
 }

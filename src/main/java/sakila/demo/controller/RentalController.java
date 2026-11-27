@@ -37,6 +37,6 @@ public class RentalController {
         Double totalPayment = paymentRepository.findTotalPaymentBetweenDates(start, end);
         model.addAttribute("totalPayment", totalPayment);
 
-        return "/sakila/rentals";
+        return "sakila/rentals";
     }
 }

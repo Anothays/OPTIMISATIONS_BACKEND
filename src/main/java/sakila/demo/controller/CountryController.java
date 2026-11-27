@@ -20,6 +20,6 @@ public class CountryController {
     public String listCountries(Model model) {
         List<Country> countries = countryRepository.findAll();
         model.addAttribute("countries", countries);
-        return "/sakila/country-city-list.html";
+        return "sakila/country-city-list";
     }
 }

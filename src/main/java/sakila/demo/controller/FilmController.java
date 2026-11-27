@@ -35,7 +35,7 @@ public class FilmController {
         Optional<Film> filmOptional = filmRepository.findById(filmId);
         if (filmOptional.isPresent()) {
             model.addAttribute("film", filmOptional.get());
-            return "/sakila/film-detail";
+            return "sakila/film-detail";
         } else {
             return "errorPage";  // return to an error page or other handling
         }
@@ -45,7 +45,7 @@ public class FilmController {
     public String getFilms(Model model) {
         List<Film> films = filmRepository.findAll(Sort.by("filmId").descending());
         model.addAttribute("films", films);
-        return "/sakila/film-list.html";
+        return "sakila/film-list";
     }
 
     @GetMapping("/addFilm")
@@ -54,7 +54,7 @@ public class FilmController {
         model.addAttribute("languages", languageRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("actors", actorRepository.findAll());
-        return "/sakila/add-film.html";
+        return "sakila/add-film";
     }
 
     @PostMapping("/addFilm")

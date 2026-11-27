@@ -22,7 +22,7 @@ public class StaffController {
     public String showStaffs(Model model) {
         List<Staff> staffs = repository.findAll();
         model.addAttribute("staffs", staffs);
-        return "/sakila/staff-list.html";
+        return "sakila/staff-list";
     }
 
     @GetMapping("/staffdetail/{id}")
@@ -32,7 +32,7 @@ public class StaffController {
         if (op.isPresent()) {
             Staff staff = op.get();
             model.addAttribute("staff", staff);
-            return "/sakila/staff-detail.html";
+            return "sakila/staff-detail";
         }
 
         return "redirect:/staff-list";

@@ -21,13 +21,13 @@ public class LanguageController {
     public String getLanguages(Model model) {
         List<Language> languages = languageRepository.findAll();
         model.addAttribute("languages", languages);
-        return "/sakila/language-list.html";
+        return "sakila/language-list";
     }
 
     @GetMapping("addlanguage")
     public String showAddLanguageForm(Model model) {
         model.addAttribute("language", new Language());
-        return "/sakila/addLanguage.html";
+        return "sakila/addLanguage";
     }
 
     @PostMapping("savelanguage")
@@ -42,10 +42,10 @@ public class LanguageController {
 
         if (lang.isPresent()) {
             model.addAttribute("language", lang.get());
-            return "/sakila/editlanguage";
+            return "sakila/editlanguage";
         }
 
-        return "/sakila/warning";
+        return "sakila/warning";
     }
 
     @GetMapping("deletelanguage/{id}")

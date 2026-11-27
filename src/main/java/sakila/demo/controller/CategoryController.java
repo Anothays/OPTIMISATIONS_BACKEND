@@ -26,6 +26,6 @@ public class CategoryController {
         }
 
         model.addAttribute("categories", cate);
-        return "/sakila/category-list.html";
+        return "sakila/category-list";
     }
 }
