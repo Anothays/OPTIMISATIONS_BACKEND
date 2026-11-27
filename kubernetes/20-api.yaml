@@ -32,7 +32,7 @@ spec:
               memory: 32Mi
       containers:
         - name: api
-          image: anothay/sakila-api:0.0.1
+          image: anothay/sakila-api:0.0.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
